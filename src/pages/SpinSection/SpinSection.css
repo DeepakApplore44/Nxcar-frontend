@@ -1,0 +1,108 @@
+.spin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 85dvh;
+}
+
+.card-image {
+  position: absolute;
+  top: 24%;
+  max-height: 55dvh;
+  width: auto;
+}
+
+.spin-container h1 {
+  bottom: 15%;
+  color: #418f86;
+  position: absolute;
+  text-align: center;
+  font-family: "Noto Sans";
+  font-size: 14rem;
+  /* font-style: normal; */
+  line-height: normal;
+  font-weight: bolder;
+}
+
+.get-started-button {
+  position: absolute;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  color: #fff;
+  background: linear-gradient(94deg, #4aa09b 1.29%, #41cfc7 102.69%), #000;
+  bottom: 0%;
+}
+
+/* SpinSection.css */
+
+.spin-container {
+  position: relative;
+  /* text-align: center; */
+}
+
+.login-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 0;
+}
+
+/* Animation */
+
+.animate {
+  .card-image {
+    transform-origin: center bottom;
+  }
+
+  .animate-card {
+    transform: rotate(0deg);
+  }
+
+  .animate-card:nth-child(1) {
+    transform: rotate(0deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(2) {
+    transform: rotate(51.42deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(3) {
+    transform: rotate(102.84deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(4) {
+    transform: rotate(154.26deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(5) {
+    transform: rotate(205.68deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(6) {
+    transform: rotate(257.1deg) translateX(0) translateY(-50%);
+  }
+
+  .animate-card:nth-child(7) {
+    transform: rotate(308.52deg) translateX(0) translateY(-50%);
+  }
+}
+
+.animate-card {
+  transition: transform 0.5s ease-in-out;
+  margin-top: 15rem;
+}
+
+.after-animation {
+  bottom: -40%;
+}
+
+.move-text {
+  transform: translateY(-200%);
+  font-size: 7rem !important;
+}
