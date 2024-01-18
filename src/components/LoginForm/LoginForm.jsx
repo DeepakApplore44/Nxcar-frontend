@@ -51,10 +51,10 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
 
   const handleNextButtonClick = async () => {
     try {
-      const response = await axios.post(
-        apiBaseURL + "/saveUserDetails",
-        userDetails
-      );
+      const response = await axios.post(apiBaseURL + "/saveUserDetails", {
+        ...userDetails,
+        phoneNumber: "91" + userDetails.phoneNumber,
+      });
 
       if (response.status === 201) {
         console.log("User details saved successfully!");
