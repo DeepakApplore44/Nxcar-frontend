@@ -11,8 +11,9 @@ import { apiBaseURL } from "../../configs/api";
 const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
   const [timer, setTimer] = useState(59);
   const [buttonText, setButtonText] = useState("Submit");
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(true);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [otpError, setOTPError] = useState(false);
 
   const [userDetails, setUserDetails] = useState({
     phoneNumber: "",
@@ -81,7 +82,6 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
       });
 
       if (response.status === 200) {
-        console.log("OTP verified successfully!");
         setOpenLoginForm(false);
         notify("OTP verified Successfully");
       } else {
@@ -89,11 +89,13 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
         notify("Invalid OTP !");
       }
     } catch (error) {
+      setOTPError(true);
       console.error("Error:", error);
     }
   };
 
   const resendOTP = async (resendOTP = true) => {
+    setButtonText("Submit");
     const storedPhoneNumber = sessionStorage.getItem("phoneNumber");
 
     const response = await axios.post(apiBaseURL + "/verifyOTP", {
@@ -103,9 +105,9 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
 
     if (response.status === 200) {
       console.log("OTP resend successfully!");
-      setButtonText("Submit");
     } else {
       console.error("Failed to resend OTP");
+      setOTPError(true);
     }
   };
 
@@ -146,12 +148,10 @@ const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
         {isFormSubmitted ? (
           <div className="otp-inputs">
             <div className="otp">
-              {/* <input type="text" />
-              <input type="text" />
-              <input type="text" />
-              <input type="text" /> */}
               <OtpInput />
             </div>
+
+            {otpError && <span className="otp-error">Invalid OTP! </span>}
             <p>
               OTP will expire with in <span>{`00:${formatTime(timer)}`}</span>
             </p>
@@ -248,16 +248,14 @@ const OtpInput = () => {
         newOtp[index] = value;
         return newOtp;
       });
+    }
 
-      // Move to the next input
-      if (index < 3 && value !== "") {
-        inputRefs[index + 1].current.focus();
-      }
+    if (index < 3 && value !== "") {
+      inputRefs[index + 1].current.focus();
     }
   };
 
   const handleInputKeyDown = (index, event) => {
-    // Move to the previous input on backspace
     if (event.key === "Backspace" && index > 0) {
       inputRefs[index - 1].current.focus();
     }

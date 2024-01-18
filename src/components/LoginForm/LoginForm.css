@@ -77,4 +77,8 @@
   border-radius: 4px;
 }
 
+.otp-inputs .otp-error {
+  color: red;
+}
+
 /* UPDATED */
