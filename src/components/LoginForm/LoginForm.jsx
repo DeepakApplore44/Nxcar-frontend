@@ -11,7 +11,7 @@ import { apiBaseURL } from "../../configs/api";
 const LoginForm = ({ openLoginForm, setOpenLoginForm }) => {
   const [timer, setTimer] = useState(59);
   const [buttonText, setButtonText] = useState("Submit");
-  const [isFormSubmitted, setIsFormSubmitted] = useState(true);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [otpError, setOTPError] = useState(false);
 
